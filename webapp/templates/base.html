@@ -1,0 +1,240 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Yoga Studio Template">
+    <meta name="keywords" content="Yoga, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Yummy Yummy</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Section Begin -->
+    <header class="header-section">
+        <div class="container">
+            <div class="logo">
+                <a href="./index.html"><img src="{% static 'img/logo.png' %}" alt=""></a>
+            </div>
+            <div class="nav-menu">
+                <nav class="main-menu mobile-menu">
+                    <ul>
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="accounts/contact">Contact</a></li>
+
+                        {% if user.is_authenticated %}
+                        <li><a href="accounts/logout">Logout</a></li>
+                        <li><a>Hello, {{user.first_name}}</a></li>
+                        
+                        {% else %}
+                        <li><a href="accounts/register">Register</a></li>
+                        <li><a href="accounts/login">Login</a></li>
+
+                        {% endif %}
+                    </ul>
+                </nav>
+                <div class="nav-right search-switch">
+                    <i class="fa fa-search"></i>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Page Top Recipe Section Begin -->
+    
+    <section class="page-top-recipe">
+        <div class="container">
+            <div class="row">
+                
+                {% for dish in dishes %}
+                       
+                        
+                        <div class="col-lg-3 col-md-6 order-lg-1">
+                            <div class="pt-recipe-item">
+                                <div class="pt-recipe-img set-bg" data-setbg="{{dish.image.url}}">
+                                    <i class="fa fa-plus"></i>
+                                </div>
+                                <div class="pt-recipe-text">
+                                    <h4>{{dish.name}}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    
+                {% endfor %}   
+            </div>
+        </div>
+    </section>
+    
+    <!-- Page Top Recipe Section End -->
+
+    <!-- Top Recipe Section Begin -->
+    <section class="top-recipe spad">
+        <div class="section-title">
+            <h5>Top Recipes this Week</h5>
+        </div>
+        <div class="container po-relative">
+            <div class="plus-icon">
+                <i class="fa fa-plus"></i>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="top-recipe-item large-item">
+                        <div class="top-recipe-img set-bg" data-setbg="{% static 'img/top-recipe/recipe.jpg' %}">
+                            <i class="fa fa-plus"></i>
+                        </div>
+                        <div class="top-recipe-text">
+                            <div class="cat-name">Desert</div>
+                            <a href="#">
+                                <h4>Rass Malai The Best Indian Desert </h4>
+                            </a>
+                            <p>Rasmalai is a popular Indian sweet of cottage cheese balls soaked in thickened, 
+                                sweetened and flavored milk.The name ras malai is the Hindi cognate of Bengali: rosh, meaning "juice", and malai, meaning "cream". 
+                                It has been described as "a rich cheesecake without a crust"</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="top-recipe-item">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                {% for dish1 in dishes1 %}
+
+                                <div class="top-recipe-img set-bg" data-setbg="{{dish1.image.url}}">
+                                    <i class="fa fa-plus"></i>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <div class="col-sm-8">
+                                {% for dish1 in dishes1 %}
+                                <div class="top-recipe-text">
+                                    <div class="cat-name">Vegan</div>
+                                    <a href="#">
+                                        <h4>{{dish1.name}}</h4>
+                                    </a>
+                                    <p>{{dish1.desc}}</p>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+               </div>
+               
+        </div>
+    </section>
+    <!-- Top Recipe Section End -->
+    <!-- Feature Recipe Section Begin -->
+    <section class="feature-recipe">
+        <div class="section-title">
+            <h5>Sunday Brunch Dishes</h5>
+        </div>
+        <div class="container po-relative">
+            <div class="plus-icon">
+                <i class="fa fa-plus"></i>
+            </div>
+            
+            <div class="row">
+                {% for recipe in recipes %}
+                <div class="col-lg-6">
+                      <div class="fr-item">
+                        <div class="fr-item-img">                
+                            <img src="{{recipe.image.url}}" alt="">
+                        </div>
+                        <div class="fr-item-text">
+                            <h4>{{recipe.name}}</h4>
+                            <p>{{recipe.desc}}</p>
+                        </div>                 
+                    </div>               
+                </div>
+                {% endfor %}
+            </div> 
+        </div>
+    </section>
+    <!-- Feature Recipe Section End -->
+
+    <!-- Footer Section Begin -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="fs-left">
+                        <div class="logo">
+                            <a href="./index.html">
+                                <img src="{% static 'img/footer-logo.png' %}" alt="">
+                            </a>
+                        </div>
+                        <p>This is a website for food popular in india. Enjoy the delicious dishes mentioned above 
+                            by cooking them with the recipes. Do tag our page on any picture you post.
+                        Thank you for visiting us.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 offset-lg-1">
+                    <form action="#" class="subscribe-form">
+                        <h3>Subscribe to our newsletter</h3>
+                        <input type="email" placeholder="Your e-mail">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <div class="social-links">
+                        <a href="#"><i class="fa fa-instagram"></i><span>Instagram</span></a>
+                        <a href="#"><i class="fa fa-pinterest"></i><span>Pinterest</span></a>
+                        <a href="#"><i class="fa fa-facebook"></i><span>Facebook</span></a>
+                        <a href="#"><i class="fa fa-twitter"></i><span>Twitter</span></a>
+                        <a href="#"><i class="fa fa-youtube"></i><span>Youtube</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="copyright-text">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Search model -->
+	<div class="search-model">
+		<div class="h-100 d-flex align-items-center justify-content-center">
+			<div class="search-close-switch">+</div>
+			<form class="search-model-form">
+				<input type="text" id="search-input" placeholder="Search here.....">
+			</form>
+		</div>
+	</div>
+	<!-- Search model end -->
+
+    <!-- Js Plugins -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'js/mixitup.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>
